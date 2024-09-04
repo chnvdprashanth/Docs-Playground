@@ -15,7 +15,7 @@ const Notes = ({ setNotes, setToggleNotes }) => {
     }
 
     try{
-      const res = await fetch("http://localhost:2003/user",{
+      await fetch("http://localhost:2003/user",{
         method: "POST",
         credentials: "include",
         headers:{
@@ -27,7 +27,6 @@ const Notes = ({ setNotes, setToggleNotes }) => {
           image: image,
         }),
       });
-      const note = await res.json();
       
       // setNotes((prevNote) => [...prevNote, note]);
       setToggleNotes(false);
