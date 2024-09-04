@@ -11,18 +11,18 @@ const Login = ({ setLoginStatus }) => {
     try {
       const userInfo = createOrGetUser(response);
 
-      const res = await fetch("http://localhost:2003/login",{
+      const res = await fetch("https://docs-playground.onrender.com/login", {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(userInfo),
-      })
+      });
       const user = await res.json();
       setUser(user);
-      localStorage.setItem('user',JSON.stringify(user));
-      
-      navigate('/user',{ replace: true });
+      localStorage.setItem("user", JSON.stringify(user));
+
+      navigate("/user", { replace: true });
     } catch (err) {
       console.log(err);
     }

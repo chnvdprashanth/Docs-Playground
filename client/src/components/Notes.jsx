@@ -9,16 +9,16 @@ const Notes = ({ setNotes, setToggleNotes }) => {
   const [image, setImage] = useState("");
 
   const handleCreateNote = async () => {
-    if(title===null || desc===null){
-        setToggleNotes(false);
-        return;
+    if (title === null || desc === null) {
+      setToggleNotes(false);
+      return;
     }
 
-    try{
-      await fetch("http://localhost:2003/user",{
+    try {
+      await fetch("https://docs-playground.onrender.com/user", {
         method: "POST",
         credentials: "include",
-        headers:{
+        headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -27,15 +27,15 @@ const Notes = ({ setNotes, setToggleNotes }) => {
           image: image,
         }),
       });
-      
+
       // setNotes((prevNote) => [...prevNote, note]);
       setToggleNotes(false);
-    } catch(err){}
+    } catch (err) {}
   };
 
-  const handleImageInput = () =>{
-    setImage(null)
-  }
+  const handleImageInput = () => {
+    setImage(null);
+  };
 
   useEffect(() => {
     const textArea = textAreaRef.current;
@@ -77,13 +77,21 @@ const Notes = ({ setNotes, setToggleNotes }) => {
       </div>
       <div className="w-full flex items-center gap-x-4 max-sm:gap-x-2 p-2">
         <div className="w-full flex items-center gap-x-4 max-sm:gap-x-2">
-          <IoImageOutline className="w-6 h-6 cursor-pointer" onClick={()=>handleImageInput}/>
+          <IoImageOutline
+            className="w-6 h-6 cursor-pointer"
+            onClick={() => handleImageInput}
+          />
           <IoCheckboxOutline className="w-6 h-6 cursor-pointer" />
           <LuUndo2 className="w-4 h-4 text-white cursor-pointer" />
           <LuRedo2 className="w-4 h-4 text-white cursor-pointer" />
         </div>
         <div className="flex justify-center items-center">
-          <p onClick={handleCreateNote} className="text-base cursor-pointer font-normal">Close</p>
+          <p
+            onClick={handleCreateNote}
+            className="text-base cursor-pointer font-normal"
+          >
+            Close
+          </p>
         </div>
       </div>
     </div>

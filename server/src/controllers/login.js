@@ -19,6 +19,7 @@ export const createUser = async (req, res) => {
     const token = createJsonWebToken(user._id);
     res.cookie("user", token, {
       httpOnly: true,
+      secure: true,
     });
 
     return res.status(200).json({ name: user.name, image: user.image });
