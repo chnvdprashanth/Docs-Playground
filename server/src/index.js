@@ -15,7 +15,11 @@ const PORT = 2003;
 
 // middlewares
 app.use(cors({
-  origin: "https://docsplayground14.netlify.app",
+  origin: "https://docs-playground-client.vercel.app",
+  credentials: true,
+}))
+app.options('*',cors({
+  origin: "https://docs-playground-client.vercel.app",
   credentials: true,
 }))
 app.use(express.json());
@@ -27,7 +31,7 @@ app.use("/images", express.static(path.resolve(__dirname, "..", "images")));
 
 // Routes
 app.use("/login", loginRouter);
-app.use("/user", loginCheck, userRouter);
+app.use("/", loginCheck, userRouter);
 // app.use("/user/note", loginCheck, notesRouter);
 
 // connect mongodb

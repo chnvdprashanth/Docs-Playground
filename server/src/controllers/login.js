@@ -20,6 +20,7 @@ export const createUser = async (req, res) => {
     res.cookie("user", token, {
       httpOnly: true,
       secure: true,
+      sameSite: "None",
     });
 
     return res.status(200).json({ name: user.name, image: user.image });
