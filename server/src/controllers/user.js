@@ -17,9 +17,6 @@ export const getNotesOfAUser = async (req, res) => {
 export const createNotesOfAUser = async (req, res) => {
   try {
     const { title, desc, image, userId } = req.body;
-
-    console.log(req.body);
-
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).send("User Not Found");

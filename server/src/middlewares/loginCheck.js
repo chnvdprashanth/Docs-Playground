@@ -2,7 +2,6 @@ import { getUserFromJsonWebToken } from "../service/auth.js";
 
 export const loginCheck = (req,res,next) => {
     const token = req.cookies?.user;
-    console.log(token);
     if(!token) return res.status(400).json({ message : "Access denied" });
 
     try{
