@@ -17,7 +17,10 @@ const PORT = 2003;
 app.use(cors({
   origin: "https://docs-playground-client.vercel.app",
   credentials: true,
-  methods: ['GET','POST','PATCH','DELETE']
+}))
+app.options('*',cors({
+  origin: "https://docs-playground-client.vercel.app",
+  credentials: true,
 }))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
