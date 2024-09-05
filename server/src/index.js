@@ -31,7 +31,7 @@ app.use("/images", express.static(path.resolve(__dirname, "..", "images")));
 
 // Routes
 app.use("/login", loginRouter);
-app.use("/user", loginCheck, userRouter);
+app.use("/", loginCheck, userRouter);
 // app.use("/user/note", loginCheck, notesRouter);
 
 // connect mongodb
