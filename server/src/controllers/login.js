@@ -1,18 +1,19 @@
 import { User } from "../models/user.js";
 import { createJsonWebToken } from "../service/auth.js";
-import { downloadImage } from "../utils/serveImageLocally.js";
+import { getCloudinaryImageURL } from "../utils/serveImageFromCloudinary.js";
+// import { downloadImage } from "../utils/serveImageLocally.js";
 
 export const createUser = async (req, res) => {
   try {
     const { sub, name, image } = req.body;
     if (!sub || !name || !image)
       return res.status(400).send("Missing Required Fields.");
-    const filename = `${sub}-${Date.now()}.jpg`;
-    await downloadImage(image, filename);
+    // const filename = `${sub}-${Date.now()}.jpg`;
+    const imageURL = await getCloudinaryImageURL(image,"user_images");
 
     const user = await User.findOneAndUpdate(
       { sub },
-      { name, image: `images/${filename}` },
+      { name, image: imageURL },
       { new: true, upsert: true }
     );
 

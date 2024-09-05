@@ -1,7 +1,7 @@
 import { Note } from "../models/notes.js";
 import { User } from "../models/user.js";
-import { downloadImage } from "../utils/serveImageLocally.js";
-import { createJsonWebToken } from "../service/auth.js";
+// import { downloadImage } from "../utils/serveImageLocally.js";
+import { getCloudinaryImageURL } from "../utils/serveImageFromCloudinary.js";
 
 export const getNotesOfAUser = async (req, res) => {
   try {
@@ -25,17 +25,17 @@ export const createNotesOfAUser = async (req, res) => {
       return res.status(404).send("User Not Found");
     }
 
-    const imagePath = null;
+    const imageURL = null;
     if (image !== "") {
       const filename = `${user._id}-${Date.now()}.jpg`;
-      await downloadImage(image, filename);
-      imagePath = `images/${filename}`;
+      imageURL = await getCloudinaryImageURL(image,"note_images");
+      // imagePath = `images/${filename}`;
     }
 
     const note = new Note({
       title,
       desc,
-      image: imagePath,
+      image: imageURL,
       user: user._id,
     });
     await note.save();
