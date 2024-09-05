@@ -27,11 +27,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // serve static images from /server/images
-app.use("/images", express.static(path.resolve(__dirname, "..", "images")));
+// app.use("/images", express.static(path.resolve(__dirname, "..", "images")));
 
 // Routes
 app.use("/login", loginRouter);
 app.use("/", loginCheck, userRouter);
+
 // app.use("/user/note", loginCheck, notesRouter);
 
 // connect mongodb
